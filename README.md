@@ -14,8 +14,7 @@ Please don’t forget, your code should be production ready, clean and tested!
 - Unit Tests
 - Basic HTML output
 - Usage of a PHP Framework (Not necessary but as a Laravel based company it's a bonus)
-- Use original txt file as input 
-
+- Use original txt file as input
 
 # Install
 - Ensure you have docker installed
@@ -23,3 +22,6 @@ Please don’t forget, your code should be production ready, clean and tested!
 
 # Use the application
 - Open [http://localhost:8005/](http://localhost:8005/)
+
+# How to test
+- Run `./vendor/bin/sail test`
