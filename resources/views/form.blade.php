@@ -4,8 +4,8 @@
     <div class="col-sm-10">
         <textarea id="contact_records" rows="10"
                   class="form-control @if($errors->has('contact_records')) is-invalid @endif"
-        >{{old('contact_records', 'todo')}}</textarea>
-        @if($errors->has('contact_records', 1))
+        >{{old('contact_records', $defaultRecords)}}</textarea>
+        @if($errors->has('contact_records'))
             <div class="invalid-feedback">{{$errors->first('contact_records')}}</div>
         @endif
     </div>
@@ -16,7 +16,7 @@
     <div class="col-sm-10">
         <input type="number" step="0.0000001" min="-90" max="90" id="office_latitude"
                class="form-control @if($errors->has('office_latitude')) is-invalid @endif "
-               value="{{old('office_latitude', 0 )}}"
+               value="{{old('office_latitude', $defaultOfficeLat )}}"
         />
         @if($errors->has('office_latitude'))
             <div class="invalid-feedback">{{$errors->first('office_latitude')}}</div>
@@ -29,7 +29,7 @@
     <div class="col-sm-10">
         <input type="number" step="0.0000001" min="-180" max="180" id="office_longitude"
                class="form-control @if($errors->has('office_longitude')) is-invalid @endif "
-               value="{{old('office_longitude', 0 )}}"
+               value="{{old('office_longitude', $defaultOfficeLng )}}"
         />
         @if($errors->has('office_longitude'))
             <div class="invalid-feedback">{{$errors->first('office_longitude')}}</div>
@@ -42,7 +42,7 @@
     <div class="col-sm-10">
         <input type="number" step="1" min="0" id="range"
                class="form-control @if($errors->has('range')) is-invalid @endif "
-               value="{{old('range', 0 )}}"
+               value="{{old('range', $defaultRangeKm )}}"
         />
         @if($errors->has('range'))
             <div class="invalid-feedback">{{$errors->first('range')}}</div>
@@ -52,6 +52,6 @@
 
 <div class="form-group row">
     <div class="col-sm-12">
-        <button type="submit" class="btn btn-primary col-sm-12">Find</button>
+        <button type="submit" class="btn btn-primary col-sm-12">Find affiliates</button>
     </div>
 </div>

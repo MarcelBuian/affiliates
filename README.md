@@ -25,3 +25,4 @@ Please don’t forget, your code should be production ready, clean and tested!
 
 # How to test
 - Run `./vendor/bin/sail test`
+- Run `./vendor/bin/sail dusk`

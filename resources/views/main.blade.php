@@ -13,14 +13,18 @@
 </head>
 <body>
 <div class="container">
-    <form role="form" action="">
+    <form role="form" method="POST" action="">
+        @csrf
         <div class="col-xs-12">
             @include('form')
         </div>
     </form>
     <hr>
+    <h3>{{ $message }}</h3>
     <ul class="list-group">
-        <li class="list-group-item"><strong>ID 12</strong> -  Yosef Giles</li>
+    @foreach($foundAffiliates as $affiliate /** @var \App\Models\Affiliate $affiliate */)
+        <li class="list-group-item"><strong>ID {{ $affiliate->getId() }}</strong> - {{ $affiliate->getName() }}</li>
+    @endforeach
     </ul>
 </div>
 
