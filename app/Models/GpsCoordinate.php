@@ -15,17 +15,22 @@ class GpsCoordinate
     private function validateLatitude(float $latitude): void
     {
         if ($latitude < -90 || $latitude > 90) {
-            throw new OutOfRangeException('Latitude should be a number between -90 and 90');
+            throw new OutOfRangeException('Latitude should be a number between -90 and 90.');
         }
     }
 
     private function validateLongitude(float $longitude): void
     {
         if ($longitude < -180 || $longitude > 180) {
-            throw new OutOfRangeException('Longitude should be a number between -180 and 180');
+            throw new OutOfRangeException('Longitude should be a number between -180 and 180.');
         }
     }
 
+    /**
+     * @throws OutOfRangeException
+     * @param float $latitude
+     * @param float $longitude
+     */
     public function __construct(float $latitude, float $longitude)
     {
         $this->validateLatitude($latitude);

@@ -20,14 +20,14 @@ class GpsCoordinateTest extends TestCase
     public function test_gps_coordinate_should_have_valid_latitude()
     {
         $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Latitude should be a number between -90 and 90');
+        $this->expectExceptionMessage('Latitude should be a number between -90 and 90.');
         new GpsCoordinate(92, 0);
     }
 
     public function test_gps_coordinate_should_have_valid_longitude()
     {
         $this->expectException(OutOfRangeException::class);
-        $this->expectExceptionMessage('Longitude should be a number between -180 and 180');
+        $this->expectExceptionMessage('Longitude should be a number between -180 and 180.');
         new GpsCoordinate(-89, -182);
     }
 }
