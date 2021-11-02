@@ -16,13 +16,32 @@ Please don’t forget, your code should be production ready, clean and tested!
 - Usage of a PHP Framework (Not necessary but as a Laravel based company it's a bonus)
 - Use original txt file as input
 
-# Install
+------
+
+# How to use:
+
+## Install
 - Ensure you have docker installed
 - Run `./vendor/bin/sail up`
 
-# Use the application
+## Use the application
 - Open [http://localhost:8005/](http://localhost:8005/)
 
-# How to test
+## How to test
 - Run `./vendor/bin/sail test`
 - Run `./vendor/bin/sail dusk`
+
+## ToDos:
+- Create more UI pages
+- Add possibility to change and select another file from where the contact records are read
+- Improve the UI, make it look better
+- Use Ajax endpoints
+  - Also add a spinner when loading
+  - Validate in realtime when adding contacts
+- Make use of Database
+- Improve the code
+- Add more tests
+- Clean up the images from docker that are not used
+- Add travis and pipelines
+- Add php sniffer
+- Add code coverage
