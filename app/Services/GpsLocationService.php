@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\GpsCoordinate;
 
-class GpsService
+class GpsLocationService
 {
     const RADIUS_METERS = 6378137;
 

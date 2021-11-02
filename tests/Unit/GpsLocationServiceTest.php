@@ -3,10 +3,10 @@
 namespace Tests\Unit;
 
 use App\Models\GpsCoordinate;
-use App\Services\GpsService;
+use App\Services\GpsLocationService;
 use PHPUnit\Framework\TestCase;
 
-class GpsServiceTest extends TestCase
+class GpsLocationServiceTest extends TestCase
 {
     public function gpsCoordinatesDistance():array
     {
@@ -22,13 +22,13 @@ class GpsServiceTest extends TestCase
     /**
      * @dataProvider gpsCoordinatesDistance
      */
-    public function test_gps_coordinate_can_be_created(array $coordinates1, array $coordinates2, float $expectedKmDistance)
+    public function test_gps_location_service_returns_correct_distance(array $coordinates1, array $coordinates2, float $expectedKmDistance)
     {
         [$lat1, $lng1] = $coordinates1;
         [$lat2, $lng2] = $coordinates2;
         $coordinate1 = new GpsCoordinate($lat1, $lng1);
         $coordinate2 = new GpsCoordinate($lat2, $lng2);
-        $this->assertEqualsWithDelta($expectedKmDistance, GpsService::make()->getDistanceInKiloMeters($coordinate1, $coordinate2), 0.001);
-        $this->assertEqualsWithDelta($expectedKmDistance*1000, GpsService::make()->getDistanceInMeters($coordinate1, $coordinate2), 1);
+        $this->assertEqualsWithDelta($expectedKmDistance, GpsLocationService::make()->getDistanceInKiloMeters($coordinate1, $coordinate2), 0.001);
+        $this->assertEqualsWithDelta($expectedKmDistance*1000, GpsLocationService::make()->getDistanceInMeters($coordinate1, $coordinate2), 1);
     }
 }
