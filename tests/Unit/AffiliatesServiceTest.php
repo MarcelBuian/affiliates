@@ -45,10 +45,8 @@ class AffiliatesServiceTest extends TestCase
         $coordinate1 = new GpsCoordinate($lat1, $lng1);
         $coordinate2 = new GpsCoordinate($lat2, $lng2);
         $affiliate1 = new Affiliate(1, 'test1', $coordinate1);
-        $affiliate2 = new Affiliate(2, 'test2', $coordinate2);
 
         $service = new AffiliateService($kmRadius);
-        $this->assertSame($expectedInRadius, $service->areInRadius($affiliate1, $affiliate2));
-        $this->assertSame($expectedInRadius, $service->areInRadius($affiliate2, $affiliate1));
+        $this->assertSame($expectedInRadius, $service->isInRadius($affiliate1, $coordinate2));
     }
 }

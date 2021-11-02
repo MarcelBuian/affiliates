@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-    <form role="form" method="POST" action="">
+    <form role="form" method="POST" action="/">
         @csrf
         <div class="col-xs-12">
             @include('form')

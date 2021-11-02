@@ -18,7 +18,7 @@ class AffiliateResource
     /**
      * @throws InvalidAffiliateJsonException
      */
-    public function create(string $affiliateJsonString): Affiliate
+    public function transform(string $affiliateJsonString): Affiliate
     {
         if (!$affiliateJson = json_decode($affiliateJsonString, true)) {
             throw InvalidAffiliateJsonException::invalidJson($affiliateJsonString);

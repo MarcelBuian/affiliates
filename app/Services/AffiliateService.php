@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Affiliate;
+use App\Models\GpsCoordinate;
 
 class AffiliateService
 {
@@ -14,11 +15,10 @@ class AffiliateService
         $this->radiusInKm = $radiusInKm;
     }
 
-    public function areInRadius(Affiliate $affiliate1, Affiliate $affiliate2): bool
+    public function isInRadius(Affiliate $affiliate, GpsCoordinate $gpsCoordinate): bool
     {
-        $loc1 = $affiliate1->getGpsCoordinate();
-        $loc2 = $affiliate2->getGpsCoordinate();
+        $loc1 = $affiliate->getGpsCoordinate();
 
-        return GpsLocationService::make()->getDistanceInKiloMeters($loc1, $loc2) <= $this->radiusInKm;
+        return GpsLocationService::make()->getDistanceInKiloMeters($loc1, $gpsCoordinate) <= $this->radiusInKm;
     }
 }

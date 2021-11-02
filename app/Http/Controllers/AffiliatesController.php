@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AffiliateFindRequest;
 use App\Models\Affiliate;
-use App\Models\GpsCoordinate;
+use App\Services\AffiliateService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -29,10 +29,10 @@ class AffiliatesController extends Controller
     private function mainView(): View
     {
         return view('main')->with([
-            'defaultRecords' => File::get($this->getDefaultRecordsPath()),
-            'defaultOfficeLat' => self::DEFAULT_OFFICE_LATITUDE,
-            'defaultOfficeLng' => self::DEFAULT_OFFICE_LONGITUDE,
-            'defaultRangeKm' => self::DEFAULT_RANGE_KM,
+            'defaultRecords' => Session::pull('contact_records', File::get($this->getDefaultRecordsPath())),
+            'defaultOfficeLat' => Session::pull('office_latitude', self::DEFAULT_OFFICE_LATITUDE),
+            'defaultOfficeLng' => Session::pull('office_longitude', self::DEFAULT_OFFICE_LONGITUDE),
+            'defaultRangeKm' => Session::pull('range', self::DEFAULT_RANGE_KM),
             'foundAffiliates' => Session::pull('affiliates') ?: collect(),
             'message' => Session::pull('message'),
         ]);
@@ -43,14 +43,31 @@ class AffiliatesController extends Controller
         return $this->mainView();
     }
 
-    public function find(Request $request): RedirectResponse
+    public function find(AffiliateFindRequest $request): RedirectResponse
     {
-        $affiliate1 = new Affiliate(12, 'test1', new GpsCoordinate(12,12));
-        $affiliate2 = new Affiliate(13, 'test2', new GpsCoordinate(12,12));
-        $affiliates = collect([$affiliate1]);
-        $affiliates->push($affiliate2);
-        $message = 'OK';
+        $service = new AffiliateService($range = $request->get('range'));
+        $office = $request->getOfficeLocation();
+        $allAffiliates = $request->getAffiliates();
+        $affiliates = $allAffiliates
+            ->filter(function (Affiliate $affiliate) use ($service, $office) {
+                return $service->isInRadius($affiliate, $office);
+            })
+            ->sortBy(function (Affiliate $affiliate) {
+                return $affiliate->getId();
+            })
+        ;
 
-        return redirect(route('affiliates.show'))->with(['affiliates' => $affiliates, 'message' => $message]);
+        $message = "Found {$affiliates->count()} from {$allAffiliates->count()} affiliates in a range of $range KM from {$office->toString()}";
+
+        $withs = [
+            'affiliates' => $affiliates,
+            'message' => $message,
+            'contact_records' => $request->get('contact_records'),
+            'office_latitude' => $request->get('office_latitude'),
+            'office_longitude' => $request->get('office_longitude'),
+            'range' => $request->get('range'),
+        ];
+
+        return redirect(route('affiliates.show'))->with($withs);
     }
 }

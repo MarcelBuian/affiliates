@@ -7,12 +7,7 @@ use Tests\DuskTestCase;
 
 class AffiliatesShowPageTest extends DuskTestCase
 {
-    /**
-     * A basic browser test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
+    public function test_show_page()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -23,7 +18,6 @@ class AffiliatesShowPageTest extends DuskTestCase
                 ->assertSee('GPS Office Longitude')
                 ->assertSee('Range (km)')
                 ->assertButtonEnabled('Find affiliates')
-                // ->press('Find affiliates')
             ;
         });
     }

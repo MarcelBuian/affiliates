@@ -11,9 +11,9 @@ class AffiliatesShowTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_affiliates_show()
     {
-        $response = $this->get('/');
+        $response = $this->get(route('affiliates.show'));
 
         $response->assertStatus(200);
     }

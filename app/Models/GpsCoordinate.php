@@ -48,4 +48,9 @@ class GpsCoordinate
     {
         return $this->longitude;
     }
+
+    public function toString(): string
+    {
+        return "{$this->latitude}, {$this->longitude}";
+    }
 }

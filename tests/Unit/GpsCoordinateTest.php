@@ -15,6 +15,7 @@ class GpsCoordinateTest extends TestCase
         $gpsCoordinate = new GpsCoordinate($lat, $long);
         $this->assertSame(20.1234567, $gpsCoordinate->getLatitude());
         $this->assertSame(100.1234567, $gpsCoordinate->getLongitude());
+        $this->assertSame('20.1234567, 100.1234567', $gpsCoordinate->toString());
     }
 
     public function test_gps_coordinate_should_have_valid_latitude()
